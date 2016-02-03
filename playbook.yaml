@@ -1,10 +1,11 @@
 ---
 - hosts: all
   sudo: true
-  tasks:
+  vars:
+    document_root: /vagrant
+  pre_tasks:
     - name: update apt-cache
       apt: update_cache=yes
-    - include: tasks/apache.yaml
-    - include: tasks/mysql.yaml
-    - include: tasks/php.yaml
-    - include: tasks/git.yaml
+  roles:
+    - webserver
+    - database
