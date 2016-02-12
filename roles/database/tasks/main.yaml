@@ -1,3 +1,8 @@
----
-- name: install mysql
-  apt: name=mysql-server state=present
+- name: Create database
+  mysql_db: name=db1 state=present collation=utf8_general_ci encoding=utf8
+
+- name: Import database
+  mysql_db: name=db1 state=import target=/vagrant/templates/dump.sql
+
+- name: Restart the MySQL service
+  action: service name=mysql state=restarted enabled=true
