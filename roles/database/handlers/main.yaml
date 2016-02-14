@@ -1,0 +1,6 @@
+---
+- name: "phpmyadmin server restart"
+  sudo: yes
+  service:
+    name: "{{ phpmyadmin_server_services[phpmyadmin_server] }}"
+    state: restarted

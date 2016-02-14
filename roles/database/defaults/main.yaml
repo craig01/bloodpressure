@@ -1,0 +1,10 @@
+---
+phpmyadmin_hostname: "localhost"
+#phpmyadmin_server: "nginx"
+phpmyadmin_user: "www-data"
+phpmyadmin_group: "www-data"
+phpmyadmin_dbconfig_install: "true"
+phpmyadmin_mysql_admin_pass: "root"
+phpmyadmin_mysql_app_pass: "secret"
+phpmyadmin_force_ssl: true
+phpmyadmin_php_fpm_listen: "127.0.0.1:9000"

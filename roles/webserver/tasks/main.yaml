@@ -1,5 +1,4 @@
 ---
 - include: apache.yaml
 - include: php.yaml
-- include: git.yaml
 - include: phpmyadmin.yaml

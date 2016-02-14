@@ -1,17 +1,20 @@
 ---
+- include: "mcrypt.yaml"
+- include: "preconfig.yaml"
+
 - name: Install the MySQL packages
-   apt: name={{ item }} state=installed update_cache=yes
-   with_items:
-     - mysql-server
-     - mysql-client
-     - python-mysqldb
-     - libmysqlclient-dev
+  apt: name={{item}} state=installed update_cache=yes
+  with_items:
+      - mysql-server
+      - mysql-client
+      - python-mysqldb
+      - libmysqlclient-dev
 
 - name: Create database
   mysql_db: name=pressure state=present collation=utf8_general_ci encoding=utf8
 
 - name: Import database
-  mysql_db: name=pressure state=import target=/vagrant/templates/dump.sql
+  mysql_db: name=pressure state=import target=/vagrant/roles/database/templates/dump.sql
 
 - name: Restart the MySQL service
   action: service name=mysql state=restarted enabled=true

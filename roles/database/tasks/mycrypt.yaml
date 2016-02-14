@@ -1,0 +1,13 @@
+---
+- name: "mcrypt installed"
+  sudo: yes
+  apt:
+    name: "php5-mcrypt"
+    state: present
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: "mcrypt enabled"
+  sudo: yes
+  command: "php5enmod mcrypt"
+  changed_when: false
