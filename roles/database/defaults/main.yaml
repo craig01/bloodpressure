@@ -1,6 +1,6 @@
 ---
 phpmyadmin_hostname: "localhost"
-#phpmyadmin_server: "nginx"
+phpmyadmin_server: "apache"
 phpmyadmin_user: "www-data"
 phpmyadmin_group: "www-data"
 phpmyadmin_dbconfig_install: "true"

@@ -2,5 +2,8 @@
 
 *bloodpressure* is a web server to practice building an application environment.
 
-This configuration is based on the web site:4 
+This initial configuration was based on the web site:
 https://adamcod.es/2014/09/23/vagrant-ansible-quickstart-tutorial.html
+
+phpMyAdmin was first attempted but was taking too much time for a simple
+command of sudo apt-get install phpmyadmin when we needed it.
