@@ -1,4 +1,3 @@
 ---
 - include: apache.yaml
 - include: php.yaml
-- include: phpmyadmin.yaml

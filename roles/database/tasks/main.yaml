@@ -1,7 +1,4 @@
 ---
-- include: "mcrypt.yaml"
-- include: "preconfig.yaml"
-
 - name: Install the MySQL packages
   apt: name={{item}} state=installed update_cache=yes
   with_items:
