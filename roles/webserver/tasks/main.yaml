@@ -1,3 +1,4 @@
 ---
 - include: apache.yaml
 - include: php.yaml
+- include: bootstrap.yaml

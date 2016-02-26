@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="Blood Pressure">
+    <meta name="description" content="Blood Pressure - Tracking">
     <meta name="author" content="Craig">
     <link rel="icon" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/favicon.ico">
 
-    <title>Blood Pressure</title>
+    <title>Blood Pressure - Tracking</title>
 
     <!-- Bootstrap core CSS -->
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -18,7 +18,7 @@
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/jumbotron.css" rel="stylesheet">
+    <link href="css/sticky-footer-navbar.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -33,7 +33,8 @@
 
   <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -42,66 +43,51 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="aboutUs.html">Blood Pressure</a>
+          <a class="navbar-brand" href="#">Blood Pressure</a>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <form class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>
-        </div><!--/.navbar-collapse -->
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">Add</a></li>
+            <li><a href="#contact">Modify</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
       </div>
     </nav>
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
-        <h1>Blood Pressure</h1>
-        <p>This is a demo app for learning how to begin a Startup idea</p>
-        <p><a class="btn btn-primary btn-lg" href="aboutApp.html" role="button">Learn more &raquo;</a></p>
+    <!-- Begin page content -->
+    <div class="container">
+      <div class="page-header">
+        <h1>Blood Pressure - Tracking</h1>
       </div>
+      <p class="lead">Pin a fixed-height footer to the bottom of the viewport in desktop browsers with this custom HTML and CSS. A fixed navbar has been added with <code>padding-top: 60px;</code> on the <code>body > .container</code>.</p>
+      <p>Back to <a href="../sticky-footer">the default sticky footer</a> minus the navbar.</p>
     </div>
 
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-md-4">
-          <h2>Tracking</h2>
-          <p>On a daily basis many of us need to record our blood pressure on a regular basis. </p>
-          <p><a class="btn btn-default" href="tracking.html" role="button">View details &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-          <h2>Reporting</h2>
-          <p>Choose between creating a report to print and share with your Doctor, or
-            viewing your weekly, monthly, or yearly statistics.</p>
-          <p><a class="btn btn-default" href="reporting.html" role="button">View details &raquo;</a></p>
-       </div>
-        <div class="col-md-4">
-          <h2>Statistics</h2>
-          <p>Are you looking for trends in your blood pressure, does it increase at certain times of the day
-           or during set activities. The statistics tool will provide greater insighht into your blood pressure. </p>
-          <p><a class="btn btn-default" href="statistics.html" role="button">View details &raquo;</a></p>
-        </div>
+    <footer class="footer">
+      <div class="container">
+        <p class="text-muted">Blood Pressure</p>
       </div>
-
-      <hr>
-
-      <footer>
-        <p>&copy; 2016 Father & Son, Inc.</p>
-      </footer>
-    </div> <!-- /container -->
+    </footer>
 
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script>window.jQuery || document.write('<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/assets/js/vendor/jquery.min.js"><\/script>')</script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/dist/js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/assets/js/ie10-viewport-bug-workaround.js"></script>
