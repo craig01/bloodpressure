@@ -4,6 +4,3 @@
 
 - name: install npm
   apt: name=npm state=present
-
-- name: install bower
-  apt: name=bower state=present
