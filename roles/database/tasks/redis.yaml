@@ -1,70 +1,63 @@
 ---
-- hosts: launched
-  sudo: yes
+- name: update apt
+  apt: update_cache=yes
 
-  vars_files:
-    - vars.yaml
+- name: ensure packages installed
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - make
+    - build-essential
+    - tcl8.5
 
-  tasks:
-  - name: update apt
-    apt: update_cache=yes
+- name: download latest stable redis
+  get_url: url=http://download.redis.io/redis-stable.tar.gz dest=/tmp/redis-stable.tar.gz
 
-  - name: ensure packages installed
-    apt: pkg={{ item }} state=latest
-    with_items:
-      - make
-      - build-essential
-      - tcl8.5
+- name: untar redis
+  command: tar zxf /tmp/redis-stable.tar.gz -C /tmp
 
-  - name: download latest stable redis
-    get_url: url=http://download.redis.io/redis-stable.tar.gz dest=/tmp/redis-stable.tar.gz
+- name: build redis
+  command: make -C /tmp/redis-stable
 
-  - name: untar redis
-    command: tar zxf /tmp/redis-stable.tar.gz -C /tmp
+- name: create redis group
+  group: name=redis state=present system=yes
 
-  - name: build redis
-    command: make -C /tmp/redis-stable
+- name: create redis user
+  user: name=redis group=redis createhome=no shell=/bin/false system=yes state=present
 
-  - name: create redis group
-    group: name=redis state=present system=yes
+- name: make sure that /etc/redis exists
+  file: path=/etc/redis state=directory mode=0755
 
-  - name: create redis user
-    user: name=redis group=redis createhome=no shell=/bin/false system=yes state=present
+- name: make sure that /var/db/redis exists
+  file: path=/var/db/redis state=directory mode=0755 group=redis owner=redis
 
-  - name: make sure that /etc/redis exists
-    file: path=/etc/redis state=directory mode=0755
+- name: make sure redis.log file exists
+  copy: src=templates/redis.log dest=/var/log/redis.log owner=redis group=redis mode=0644
 
-  - name: make sure that /var/db/redis exists
-    file: path=/var/db/redis state=directory mode=0755 group=redis owner=redis
+- name: copy upstart file
+  copy: src=templates/upstart.conf dest=/etc/init/redis.conf
 
-  - name: make sure redis.log file exists
-    copy: src=templates/redis.log dest=/var/log/redis.log owner=redis group=redis mode=0644
+- name: copy redis.conf file
+  copy: src=templates/redis.conf dest=/etc/redis/redis.conf group=redis owner=redis
 
-  - name: copy upstart file
-    copy: src=templates/upstart.conf dest=/etc/init/redis.conf
+- name: copy custom template
+  template: src=templates/redis.local.conf.j2 dest=/etc/redis/redis.local.conf group=redis owner=redis
 
-  - name: copy redis.conf file
-    copy: src=templates/redis.conf dest=/etc/redis/redis.conf group=redis owner=redis
+- name: copy redis-local script
+  template: src=templates/redis-local.j2 dest=/usr/local/bin/redis-local mode=0755
 
-  - name: copy custom template
-    template: src=templates/redis.local.conf.j2 dest=/etc/redis/redis.local.conf group=redis owner=redis
+- name: installing redis binaries
+  command: cp /tmp/redis-stable/src/{{ item }} /usr/local/bin
+  with_items:
+    - redis-server
+    - redis-cli
+    - redis-check-aof
+    - redis-check-dump
 
-  - name: copy redis-local script
-    template: src=templates/redis-local.j2 dest=/usr/local/bin/redis-local mode=0755
+- name: cleaning up build files
+  command: rm -rf /tmp/{{ item }}
+  with_items:
+    - redis-stable
+    - redis-stable.tar.gz
 
-  - name: installing redis binaries
-    command: cp /tmp/redis-stable/src/{{ item }} /usr/local/bin
-    with_items:
-      - redis-server
-      - redis-cli
-      - redis-check-aof
-      - redis-check-dump
-
-  - name: cleaning up build files
-    command: rm -rf /tmp/{{ item }}
-    with_items:
-      - redis-stable
-      - redis-stable.tar.gz
-
-  - name: ensure redis service is restarted
-    service: name=redis state=restarted
+- name: ensure redis service is restarted
+  service: name=redis state=restarted

@@ -2,14 +2,8 @@
 daemonize no
 
 pidfile /var/run/redis.pid
-port {{ redis_port }}
+port 6379
 timeout 0
 loglevel notice
 logfile /var/log/redis.log
 dir /var/db/redis/
-
-{% if redis_password %}
-
-requirepass {{ redis_password }}
-
-{% endif %}
