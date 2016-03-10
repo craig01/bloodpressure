@@ -1,0 +1,17 @@
+---
+- name: Get software for Redis.
+  apt: "name={{ item }} state=installed"
+  with_items:
+    - unzip
+
+- name: create Predis client folder
+  file: 'path="/tmp/predis" state=directory'
+
+- name: download latest stable Predis client
+  get_url:
+    url: "https://github.com/nrk/predis/archive/v1.0.zip"
+    dest: "/tmp/predis/master.zip"
+    force: yes
+
+- name: go to folder Predis and unzip
+  command: 'chdir="/tmp/predis/" unzip master.zip'
