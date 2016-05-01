@@ -21,10 +21,10 @@ catch (Exception $e) {
 
 $redis->set("message", "Hello world");
 
-// gets the value of message
+/ / gets the value of message
 $value = $redis->get('message');
 
 // Hello world
-print($value);
+echo($value);
 
 ?>

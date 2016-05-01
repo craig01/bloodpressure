@@ -60,7 +60,19 @@
       <div class="page-header">
         <h1>Add Blood Pressure</h1>
       </div>
-      <p class="lead">Use this page to add your blood pressure</p>
+      <form class="form-inline" action="addBPtoDB.php" method="post">
+        <div class="col-xs-2">
+          <label for="systolic">Systolic</label>
+          <input type="text" maxlength="3" class="form-control" name="systolic" id="systolic" placeholder="0">
+        </div>
+        <div class="col-xs-2">
+          <label for="diastolic">Diastolic</label>
+          <input type="text" maxlength="3" class="form-control" name="diastolic" id="diastolic" placeholder="0">
+        </div>
+        <div class="col-xs-2">
+          <button type="submit" class="btn btn-default">Save</button>
+        </div>
+      </form>
     </div>
 
     <footer class="footer">

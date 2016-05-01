@@ -19,8 +19,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE IF NOT EXISTS `readings` (
-  `date` date NOT NULL,
-  `time` time NOT NULL,
+  `addDate` date NOT NULL,
+  `addTime` time NOT NULL,
   `systolic` int(3) NOT NULL,
   `diastolic` int(3) NOT NULL,
   `heartrate` int(3) NOT NULL
