@@ -1,35 +1,37 @@
-<html>
-<body>
-
-Systolic <?php echo $_POST["systolic"]; ?><br>
-diastolic <?php echo $_POST["diastolic"]; ?><br>
-
-</body>
-</html>
 <?php
-$servername = "localhost";
-$username = "username";
-$password = "password";
-$dbname = "myDB";
 
-$systolic = $_POST("systolic");
-$diastolic = $_POST("diastolic");
+$servername = "127.0.0.1";
+$username = "root";
+$password = "";
+$dbname = "pressure";
+
+$systolic = $_POST["systolic"];
+$diastolic = $_POST["diastolic"];
+$date = date("ddmmYYYY");
+$time = date("GGHH");
 
 // Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+
+if (!$conn) {
+    echo "Error: Unable to connect to MySQL." . PHP_EOL;
+    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    exit;
 }
 
-$sql = "INSERT INTO pressure (date,time,systolic,diastolic,heartrate)
-VALUES (" + $date + "," + $time + "," + $systolic + "," + $diastolic + ",0)";
+$sql = "INSERT INTO readings (addDate,addTime,systolic,diastolic,heartrate)
+VALUES ('15041968','1812','90','130','60')";
 
-if ($conn->query($sql) === TRUE) {
+//$sql = "INSERT INTO pressure (addDate,addTime,systolic,diastolic,heartrate)
+//VALUES (" + $date + "," + $time + "," + $systolic + "," + $diastolic + ",'0')";
+
+
+if (mysqli_query($conn, $sql)) {
     echo "New record created successfully";
 } else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
 }
 
-$conn->close();
+mysqli_close($conn);
 ?>
