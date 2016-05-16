@@ -7,6 +7,7 @@ https://adamcod.es/2014/09/23/vagrant-ansible-quickstart-tutorial.html
 
 phpMyAdmin was first attempted but was taking too much time for a simple
 command of sudo apt-get install phpmyadmin when we needed it.
+By default, userid is root and there is no password
 
 Database:
 

@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('AEST');
 
 $servername = "127.0.0.1";
 $username = "root";
@@ -7,8 +8,9 @@ $dbname = "pressure";
 
 $systolic = $_POST["systolic"];
 $diastolic = $_POST["diastolic"];
-$date = date("ddmmYYYY");
-$time = date("GGHH");
+$heartrate = $_POST["heartrate"];
+$mdate = date("Y-m-d");
+$mtime = date("H:m:s");
 
 // Create connection
 $conn = mysqli_connect($servername, $username, $password, $dbname);
@@ -21,7 +23,7 @@ if (!$conn) {
 }
 
 $sql = "INSERT INTO readings (addDate,addTime,systolic,diastolic,heartrate)
-VALUES ('15041968','1812','90','130','60')";
+VALUES ('$mdate', '$mtime', '$systolic', '$diastolic', '$heartrate')";
 
 //$sql = "INSERT INTO pressure (addDate,addTime,systolic,diastolic,heartrate)
 //VALUES (" + $date + "," + $time + "," + $systolic + "," + $diastolic + ",'0')";
