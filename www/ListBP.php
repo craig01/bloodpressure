@@ -5,11 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="Blood Pressure - Tracking">
+    <meta name="description" content="Blood Pressure - Add">
     <meta name="author" content="Craig">
     <link rel="icon" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/favicon.ico">
 
-    <title>Tracking</title>
+    <title>List Blood Pressure</title>
 
     <!-- Bootstrap core CSS -->
     <link href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -48,36 +48,77 @@
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
             <li class="active"></li>
-            <li><a href="addBP.html">Add</a></li>
-            <li><a href="modifyBP.html">Modify</a></li>
-            <li><a href="ListBP.php">List</a></li>
+            <!-- <li><a href="addBP.html">/a></li>
+            <li><a href="modifyBP.html">Modify</a></li> -->
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
 
     <!-- Begin page content -->
-    <div class="container">
+    <div class="grid">
       <div class="page-header">
-        <h1>Tracking</h1>
+        <h1>List Blood Pressure results</h1>
       </div>
-      <p class="lead">Use the options above to Add, Modify, and View your blood pressure readings</p>
-    </div>
 
-    <footer class="footer">
-      <div class="container">
-        <p class="text-muted">Blood Pressure - &copy; 2016 Father & Son, Inc.</p>
-      </div>
-    </footer>
+<?php
 
+$servername = "127.0.0.1";
+$username = "root";
+$password = "";
+$dbname = "pressure";
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/assets/js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/dist/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/assets/js/ie10-viewport-bug-workaround.js"></script>
-  </body>
-</html>
+// Create connection
+$conn = mysqli_connect($servername, $username, $password, $dbname);
+
+if (!$conn) {
+    echo "Error: Unable to connect to MySQL." . PHP_EOL;
+    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    exit;
+}
+
+/* Select queries return a resultset */
+if ($result = mysqli_query($conn, "SELECT * FROM readings")) {
+    printf("%d rows.\n", mysqli_num_rows($result));
+
+    echo "<table class=\"table\">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>add Date</th>
+          <th>add Time</th>
+          <th>Diastolic</th>
+          <th>Systolic</th>
+          <th>Heart Rate</th>
+        </tr>
+      </thead>
+      <tbody>";
+
+    while ($row = $result->fetch_array()) {
+      $rows[] = $row;
+    }
+
+    foreach ($rows as $row)
+    {
+        echo "<tr><th scope=\"row\">Edit</th><td>";
+        echo $row['addDate'];
+        echo"</td><td>";
+        echo $row['addTime'];
+        echo"</td><td>";
+        echo $row['diastolic'];
+        echo"</td><td>";
+        echo $row['systolic'];
+        echo"</td><td>";
+        echo $row['heartrate'];
+        echo"</td></tr>";
+    }
+    echo "</tbody></table>";
+
+    /* free result set */
+    mysqli_free_result($result);
+}
+
+/* Close the connection */
+mysqli_close($conn);
+?>
